@@ -1,5 +1,6 @@
 package com.huamani.modaapp
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,7 @@ class CatalogAdapter(
     private val onAddClick: (Product) -> Unit
 ) : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder>() {
 
-    inner class CatalogViewHolder(val binding: ItemCatalogBinding) :
+    class CatalogViewHolder(val binding: ItemCatalogBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogViewHolder {
@@ -26,6 +27,17 @@ class CatalogAdapter(
             tvProductName.text = product.name
             tvProductDetails.text = product.details
             tvProductPrice.text = "S/ %.2f".format(product.price)
+
+            if (product.foto.isNotEmpty()) {
+                try {
+                    ivProductPhoto.setImageURI(Uri.parse(product.foto))
+                } catch (e: Exception) {
+                    ivProductPhoto.setImageResource(android.R.drawable.ic_menu_gallery)
+                }
+            } else {
+                ivProductPhoto.setImageResource(android.R.drawable.ic_menu_gallery)
+            }
+
             btnAdd.setOnClickListener {
                 onAddClick(product)
             }

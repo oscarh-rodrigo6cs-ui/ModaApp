@@ -28,6 +28,11 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name=".NuevaPrendaActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".CatalogActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

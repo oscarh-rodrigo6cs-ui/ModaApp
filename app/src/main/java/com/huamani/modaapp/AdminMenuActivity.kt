@@ -16,7 +16,8 @@ class AdminMenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.cardRopa.setOnClickListener {
-            Toast.makeText(this, "Sección Ropa (Próximamente)", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, NuevaPrendaActivity::class.java)
+            startActivity(intent)
         }
 
         binding.cardPedidos.setOnClickListener {

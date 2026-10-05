@@ -74,10 +74,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tvCatTodas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_button_primary"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="Todas"
@@ -86,10 +89,13 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvCatPolos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_card"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="Polos"
@@ -97,10 +103,13 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tvCatPantalones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_card"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="Pantalones"
@@ -108,9 +117,12 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tvCatVestidos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_card"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="Vestidos"

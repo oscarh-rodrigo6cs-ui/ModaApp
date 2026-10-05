@@ -25,11 +25,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
+                android:id="@+id/ivProductPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
                 android:src="@android:drawable/ic_menu_gallery"
-                app:tint="@color/primary"
                 tools:ignore="ContentDescription" />
         </FrameLayout>
 
