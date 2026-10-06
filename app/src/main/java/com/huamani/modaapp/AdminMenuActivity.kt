@@ -16,12 +16,13 @@ class AdminMenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.cardRopa.setOnClickListener {
-            val intent = Intent(this, NuevaPrendaActivity::class.java)
+            val intent = Intent(this, AdminRopaActivity::class.java)
             startActivity(intent)
         }
 
         binding.cardPedidos.setOnClickListener {
-            Toast.makeText(this, "Sección Pedidos (Próximamente)", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, AdminPedidosActivity::class.java)
+            startActivity(intent)
         }
 
         binding.cardClientes.setOnClickListener {

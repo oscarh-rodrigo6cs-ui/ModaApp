@@ -21,6 +21,11 @@ class CatalogActivity : AppCompatActivity() {
 
         dbHelper = DbHelper(this)
 
+        setSupportActionBar(binding.toolbarCatalog)
+        binding.toolbarCatalog.setNavigationOnClickListener {
+            finish()
+        }
+
         setupCategoryFilters()
         loadProducts(null)
 
@@ -32,17 +37,29 @@ class CatalogActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Reload products whenever returning to catalog (e.g. after adding new prenda)
         loadProducts(currentCategory)
+        updateCartBadge()
     }
 
     private fun loadProducts(categoria: String?) {
         val products = dbHelper.obtenerRopa(categoria)
         val adapter = CatalogAdapter(products) { product ->
+            CartManager.addItem(product)
+            updateCartBadge()
             Toast.makeText(this, "${product.name} agregado al carrito", Toast.LENGTH_SHORT).show()
         }
         binding.rvCatalog.layoutManager = GridLayoutManager(this, 2)
         binding.rvCatalog.adapter = adapter
+    }
+
+    private fun updateCartBadge() {
+        val count = CartManager.getItems().sumOf { it.quantity }
+        if (count > 0) {
+            binding.tvCartBadge.text = count.toString()
+            binding.tvCartBadge.visibility = android.view.View.VISIBLE
+        } else {
+            binding.tvCartBadge.visibility = android.view.View.GONE
+        }
     }
 
     private fun setupCategoryFilters() {
@@ -65,11 +82,11 @@ class CatalogActivity : AppCompatActivity() {
     private fun updateCategoryUI(selectedView: TextView, allViews: List<TextView>) {
         for (view in allViews) {
             if (view == selectedView) {
-                view.setBackgroundResource(R.drawable.bg_button_primary)
-                view.setTextColor(getColor(R.color.white))
+                view.setBackgroundResource(R.drawable.bg_pill_selected)
+                view.setTextColor(getColor(R.color.primary))
                 view.setTypeface(null, android.graphics.Typeface.BOLD)
             } else {
-                view.setBackgroundResource(R.drawable.bg_card)
+                view.setBackgroundResource(R.drawable.bg_pill_unselected)
                 view.setTextColor(getColor(R.color.text_primary))
                 view.setTypeface(null, android.graphics.Typeface.NORMAL)
             }

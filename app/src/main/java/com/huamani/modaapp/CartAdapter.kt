@@ -24,8 +24,9 @@ class CartAdapter(
         val item = cartItems[position]
         with(holder.binding) {
             tvCartItemName.text = item.productName
-            tvCartItemDetails.text = item.details
-            tvCartItemPrice.text = item.priceText
+            tvCartItemDetails.text = "${item.details} - Cant: ${item.quantity}"
+            tvCartItemPrice.text = "S/ %.2f".format(item.subtotal)
+
             root.setOnLongClickListener {
                 onItemLongClick(item)
                 true

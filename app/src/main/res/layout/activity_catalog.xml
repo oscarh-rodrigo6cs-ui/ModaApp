@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,12 +13,13 @@
         android:id="@+id/toolbarCatalog"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:background="@color/surface"
+        android:background="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
         app:title="Catálogo"
-        app:titleTextColor="@color/primary" />
+        app:titleTextColor="@color/white" />
 
     <!-- Cart Icon in Toolbar (or FrameLayout wrapper) -->
     <FrameLayout
@@ -35,8 +37,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:src="@android:drawable/ic_menu_agenda"
-            app:tint="@color/primary"
+            android:src="@drawable/ic_shopping_bag"
+            app:tint="@color/white"
             tools:ignore="ContentDescription" />
 
         <!-- Badge count (e.g. 2) -->
@@ -52,7 +54,8 @@
             android:text="2"
             android:textColor="@color/white"
             android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
     </FrameLayout>
 
     <!-- Categories Horizontal ScrollView / Chips -->
@@ -78,13 +81,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_button_primary"
+                android:background="@drawable/bg_pill_selected"
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="Todas"
-                android:textColor="@color/white"
+                android:textColor="@color/primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -93,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_pill_unselected"
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingHorizontal="16dp"
@@ -107,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_pill_unselected"
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingHorizontal="16dp"
@@ -120,7 +123,7 @@
                 android:id="@+id/tvCatVestidos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_pill_unselected"
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingHorizontal="16dp"

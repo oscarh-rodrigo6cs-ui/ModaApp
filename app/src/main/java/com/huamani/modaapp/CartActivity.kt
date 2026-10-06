@@ -1,5 +1,6 @@
 package com.huamani.modaapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,29 +10,46 @@ import com.huamani.modaapp.databinding.ActivityCartBinding
 class CartActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCartBinding
+    private lateinit var cartAdapter: CartAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val cartItems = listOf(
-            CartItem("Polo oversize - M", "Azul - 2 x S/ 39.90", "S/ 79.80", 79.80),
-            CartItem("Jean slim - 32", "Gris - 1 x S/ 89.90", "S/ 89.90", 89.90),
-            CartItem("Vestido midi - S", "Morado - 1 x S/ 119.00", "S/ 119.00", 119.00)
-        )
+        setupCartList()
 
-        val adapter = CartAdapter(cartItems) { item ->
-            Toast.makeText(this, "${item.productName} eliminado del carrito", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.rvCartItems.layoutManager = LinearLayoutManager(this)
-        binding.rvCartItems.adapter = adapter
-        binding.tvTotalPrice.text = "S/ 288.70"
-
-        binding.btnCheckout.setOnClickListener {
-            Toast.makeText(this, "¡Pedido realizado con éxito!", Toast.LENGTH_LONG).show()
+        binding.btnBack.setOnClickListener {
             finish()
         }
+
+        binding.btnCheckout.setOnClickListener {
+            if (CartManager.getItems().isEmpty()) {
+                Toast.makeText(this, "El carrito está vacío", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val intent = Intent(this, DatosPedidoActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshCart()
+    }
+
+    private fun setupCartList() {
+        cartAdapter = CartAdapter(CartManager.getItems()) { item ->
+            CartManager.removeItem(item)
+            refreshCart()
+            Toast.makeText(this, "${item.productName} eliminado", Toast.LENGTH_SHORT).show()
+        }
+        binding.rvCartItems.layoutManager = LinearLayoutManager(this)
+        binding.rvCartItems.adapter = cartAdapter
+    }
+
+    private fun refreshCart() {
+        cartAdapter.notifyDataSetChanged()
+        binding.tvTotalPrice.text = "S/ %.2f".format(CartManager.getTotal())
     }
 }
